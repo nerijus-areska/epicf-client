@@ -1,0 +1,62 @@
+<h2 *ngIf="area !== undefined">{{ area.name }}</h2>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <canvas
+        #areaCanvas
+        width="400"
+        height="800"
+        style="border: 1px solid #d3d3d3"
+      >
+      </canvas>
+    </div>
+    <div *ngIf="roomStatus !== undefined" class="col">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2>Hero HP: {{ roomStatus.user.hp }}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h2>
+              Monster: {{ roomStatus.monster.name }} HP:
+              {{ roomStatus.monster.hp }}
+            </h2>
+          </div>
+          <div class="col">
+            <img
+              [src]="
+                '../../assets/monsters/' + roomStatus.monster.name + '_big.png'
+              "
+              style="max-width: 200px"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button
+              [disabled]="roomIsCleared() ? true : null"
+              (click)="attack()"
+            >
+              Attack
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" *ngIf="roomIsCleared()">
+            <h3>Loot is here:</h3>
+            <b>Found {{ roomStatus.monster.loot.coins }} coins</b>
+            <div
+              *ngFor="let item of roomStatus.monster.loot.items"
+              class="lootList"
+            >
+              <button (click)="grabItem(item)">Grab</button>
+              <p>{{ item }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

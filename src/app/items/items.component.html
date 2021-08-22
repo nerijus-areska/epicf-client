@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="parentImage">
+        <img
+          class="imageHero"
+          src="../../assets/hero-blank.jpg"
+          alt=""
+          style="max-width: fit-content"
+        />
+        <img class="imageSlotHead" [src]="getSlotImageUrl('HEAD')" />
+        <img class="imageSlotFeet" [src]="getSlotImageUrl('Feet')" />
+      </div>
+    </div>
+    <div class="col-xl-8">
+      <div class="container" style="margin: 0.5em">
+        <div
+          class="row row-striped"
+          [ngClass]="{ equipped: item.equipped }"
+          *ngFor="let item of items"
+        >
+          <div class="col-2 text-center">
+            <img
+              [src]="getImageUrl(item.template.name)"
+              style="max-width: 40px; max-height: 30px"
+            />
+          </div>
+          <div class="col">{{ item.template.name }}</div>
+          <div class="col-2">
+            <button (click)="onEquipItem(item)">
+              {{ item.equipped ? "Remove" : "Equip" }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
